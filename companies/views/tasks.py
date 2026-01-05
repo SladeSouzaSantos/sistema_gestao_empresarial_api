@@ -36,7 +36,7 @@ class Tasks(Base):
         
         if due_date:
             try:
-                due_date = datetime.datetime.strptime(due_date, "%d/%m/%Y %H:%M").date()
+                due_date = datetime.datetime.strptime(due_date, "%d/%m/%Y %H:%M")
             except ValueError:
                 raise APIException("Envie uma data com o formato correto: d/m/Y H:M", "date_invalid")
             
@@ -83,7 +83,7 @@ class TaskDetail(Base):
 
         if due_date and due_date != task.due_date:
             try:
-                due_date = datetime.datetime.strptime(due_date, "%d/%m/%Y %H:%M").date()
+                due_date = datetime.datetime.strptime(due_date, "%d/%m/%Y %H:%M")
             except ValueError:
                 raise APIException("Envie uma data com o formato correto: d/m/Y H:M", "date_invalid")
         
