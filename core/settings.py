@@ -14,6 +14,8 @@ from dotenv import load_dotenv
 from pathlib import Path
 from datetime import timedelta
 
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,12 +24,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+qrne!ei$r9#bb6avwhw&me3@d(ul52)oa7l(8f2t7s23tre!@'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+# CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost').split(',')
+# ALLOWED_HOSTS = [os.getenv('DJANGO_ALLOWED_HOSTS', 'http://localhost').split(',')]
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -87,12 +92,10 @@ CORS_ALLOW_ALL_ORIGINS = True
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-load_dotenv() 
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        # Usando os.environ.get() para ler as variáveis de ambiente do arquivo .env
+        'ENGINE': os.getenv('DB_ENGINE'),
         'NAME': os.environ.get('DB_NAME', 'default_db_name'), 
         'USER': os.environ.get('DB_USER', 'default_user'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'default_password'),
@@ -137,6 +140,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -150,6 +154,8 @@ REST_FRAMEWORK = {
     )
 }
 
+token_lifetime = int(os.getenv('ACCESS_TOKEN_LIFETIME_MINUTES', 60))
 SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=token_lifetime),
     "SLIDING_TOKEN_LIFETIME": timedelta(days=1),
 }

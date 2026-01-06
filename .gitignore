@@ -10,6 +10,9 @@ local_settings.py  # se você usa um arquivo de settings local
 .DS_Store          # macOS specific
 .vscode/           # Visual Studio Code specific (opcional)
 *.env
+/venv
+/.env
+/.mypy_cache
 
 # Dependency management
 Pipfile.lock
