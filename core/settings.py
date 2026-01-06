@@ -13,6 +13,9 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 from datetime import timedelta
+import pymysql
+
+pymysql.install_as_MySQLdb()
 
 load_dotenv()
 
