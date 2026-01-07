@@ -102,7 +102,7 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME', 'default_db_name'), 
         'USER': os.environ.get('DB_USER', 'default_user'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'default_password'),
-        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'HOST': os.environ.get('DB_HOST', 'sistema-erp-db-db-1'),
         'PORT': os.environ.get('DB_PORT', '3306'),
     }
 }
