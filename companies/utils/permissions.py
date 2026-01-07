@@ -38,7 +38,7 @@ class GroupsPermission(permissions.BasePermission):
     message = "O funcionário não possui permissão para gerenciar grupos."
 
     def has_permission(self, request, _view):
-        return check_permission(request.user, request.method, permission_to="group")
+        return check_permission(request.user, request.method, permission_to="usergroup")
 
 class GroupsPermissionsPermission(permissions.BasePermission):
     message = "O funcionário não possui permissão para gerenciar permissões."
